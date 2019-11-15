@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "1032190845128",
+    "firebase_url": "https://matchbusi-test.firebaseio.com",
+    "project_id": "matchbusi-test",
+    "storage_bucket": "matchbusi-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032190845128:android:d27fa56059189b289a05fd",
+        "android_client_info": {
+          "package_name": "com.example.deneme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032190845128-8htq41h47jkkccs4sajlg0k1upbd6ph3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5sXKfoB-28umVBFqaPzM9lCcBiUg_m5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032190845128-8htq41h47jkkccs4sajlg0k1upbd6ph3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032190845128:android:5cb7c3cb593fd51f9a05fd",
+        "android_client_info": {
+          "package_name": "com.oliwag.matchbusiness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032190845128-j25ggp9cujvip4np61jbvecmim3stlkc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oliwag.matchbusiness",
+            "certificate_hash": "149a69db3f0376b0c75ec03f61f0c1548f45e343"
+          }
+        },
+        {
+          "client_id": "1032190845128-8htq41h47jkkccs4sajlg0k1upbd6ph3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5sXKfoB-28umVBFqaPzM9lCcBiUg_m5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032190845128-8htq41h47jkkccs4sajlg0k1upbd6ph3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032190845128:android:36c27f20a0dbce039a05fd",
+        "android_client_info": {
+          "package_name": "emrealtunbilek.com.flutter_lovers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032190845128-8htq41h47jkkccs4sajlg0k1upbd6ph3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5sXKfoB-28umVBFqaPzM9lCcBiUg_m5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032190845128-8htq41h47jkkccs4sajlg0k1upbd6ph3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
