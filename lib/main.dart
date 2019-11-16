@@ -6,6 +6,10 @@ import 'package:matchbussiness/Services/serviceLocator.dart';
 void main() { 
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+
+  
+
+
   runApp(Main());
 
 }

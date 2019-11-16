@@ -46,13 +46,13 @@ class _MatchViewPageState extends State<MatchViewPage> {
                                 (DragUpdateDetails details, Alignment align) {
                                   
                               /// Get swiping card's alignment
-                              if (align.x < -3) {
+                              if (align.x < -4) {
                                 //Card is LEFT swiping
                                 setState(() {
                                   messageBox = 30;
                                 });
 
-                              } else if (align.x > 3) {
+                              } else if (align.x > 4) {
                                 //Card is RIGHT swiping
                                 setState(() {
                                   favBox = 30;
@@ -72,7 +72,7 @@ class _MatchViewPageState extends State<MatchViewPage> {
                                     messageBox = 0;  
                                 });
 
-                                if(index == totalCount-1){
+                                if(index == totalCount-1&& orientation != CardSwipeOrientation.RECOVER){
                                   setState(() {
                                     islistOver = true;
                                   });
@@ -152,7 +152,7 @@ class _MatchViewPageState extends State<MatchViewPage> {
   Widget NoCardLeft(){
     
     
-    print(widget.documents.documents[0].data);
+    //print(widget.documents.documents[0].data);
     return Center(
                   child: new Column(
                     mainAxisAlignment: MainAxisAlignment.center,

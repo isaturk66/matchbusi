@@ -1,11 +1,13 @@
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:matchbussiness/Constants/routerConstants.dart';
+import 'package:matchbussiness/Models/createAccountArgModel.dart';
 import 'package:matchbussiness/Services/firebaseAuth.dart';
 
 class CreateProfilePage extends StatelessWidget {
-  final email;
-  CreateProfilePage(this.email);
+
+  final CreateAccArg args;
+  CreateProfilePage(this.args);
 
   final _formKey = GlobalKey<FormState>();
   final GetIt sl = GetIt.instance;
@@ -105,9 +107,8 @@ class CreateProfilePage extends StatelessWidget {
                     onTap: ()async{
                             if (_formKey.currentState.validate()) { 
                                            var myAppModel = sl<FirebaseAuth>();
-                                           await myAppModel.createAccount(namecontroller.value.text, titlecontroller.value.text, skillscontroller.value.text, email);
+                                           await myAppModel.createAccount(args.userID,namecontroller.value.text, titlecontroller.value.text, skillscontroller.value.text, args.email,args.profileImg);
                                            Navigator.of(context).pushNamed(skeletonRoute);
-
                             }
                     },
                     child: Padding(

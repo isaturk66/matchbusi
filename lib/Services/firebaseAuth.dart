@@ -17,18 +17,22 @@ class FirebaseAuth{
    }
 
    final databaseReference = Firestore.instance;
-  
-  createAccount(var name,title,skills,email,) async{
+    
+  createAccount(var userID,name,title,skills,email,profileImg) async{
     List<String> skilllist =skills.toString().split(",").toList();
-    await databaseReference.collection('users').document()
-    .setData({ 'email': email, 'username': name,'title' : title,'skills': skilllist});
+    await databaseReference.collection('users').document("linked in idw").snapshots().listen((querrsnapshots){});
+    await databaseReference.collection('users')
+    .document()
+    .setData({ 'userID' : userID,'email': email, 'username': name,'title' : title,'skills': skilllist});
 
 
     var createnmodel = UserModel(
+      userID: userID,
       email: email,
       username: name,
       skills: skilllist,
       title: title,
+      profilePicture: profileImg
     );
     _currentUser = createnmodel;
   }
@@ -50,6 +54,7 @@ class FirebaseAuth{
             email: data.documents.first.data['email'],
             title: data.documents.first.data['title'],
             skills: data.documents.first.data['skills'].cast<String>().toList(),
+            //profilePicture: data.documents.first.data[]
           );
           _currentUser = model;
             return true;
