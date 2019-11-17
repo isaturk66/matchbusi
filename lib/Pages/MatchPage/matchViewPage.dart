@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:get_it/get_it.dart';
+import 'package:matchbussiness/Constants/routerConstants.dart';
+import 'package:matchbussiness/Models/userModel.dart';
 import 'package:matchbussiness/Pages/MatchPage/swipeCard.dart';
 import 'package:matchbussiness/Services/firebaseAuth.dart';
 
@@ -23,15 +25,41 @@ class _MatchViewPageState extends State<MatchViewPage> {
   bool islistOver = false;
 
 
-  Widget TinderBody(var totalCount){
+  onMessageRequested(var doc){
+    TabController controller = DefaultTabController.of(context);
+    
+    var model = UserModel(
+            userID: doc['userID'],
+            username: doc['username'],
+            email: doc['email'],
+            title: doc['title'],
+            skills: doc['skills'].cast<String>().toList(),
+            profilePicture: doc['profileImg'],
+            conversations: doc['conversations'].cast<String>().toList(),
+          );
 
+    controller.animateTo(0,duration: Duration(milliseconds:200));
+
+
+    Future.delayed(Duration(milliseconds:200),() => Navigator.of(context).pushNamed(chatRoute,arguments: model));
+    
+  }
+
+
+final GetIt getIt = GetIt.I;
+
+  Widget TinderBody(var totalCount){
+        List<DocumentSnapshot> docList= widget.documents;
+        
+        var currentUser = getIt<FirebaseAuth>().currentuser;
+        docList.removeWhere((docsnap) => docsnap.data['userID'] == currentUser.userID);
     return Column(
           children: <Widget>[
             Container(
               height: 500,
                   child: new TinderSwapCard(
                             orientation: AmassOrientation.BOTTOM,
-                            totalNum: 1,
+                            totalNum: docList.length,
                             stackNum: 3,
                             swipeEdge: 4.0,
                             maxWidth: MediaQuery.of(context).size.width * 0.9,
@@ -39,7 +67,7 @@ class _MatchViewPageState extends State<MatchViewPage> {
                             minWidth: MediaQuery.of(context).size.width * 0.8,
                             minHeight: MediaQuery.of(context).size.width * 0.8,
                             cardBuilder: (context, index) => Card(
-                                  child: SwipeCard(),
+                                  child: SwipeCard(docList[index]),
                                  ),
                             cardController: controller = CardController(),
                             swipeUpdateCallback:
@@ -71,8 +99,10 @@ class _MatchViewPageState extends State<MatchViewPage> {
                                     favBox = 0;
                                     messageBox = 0;  
                                 });
-
-                                if(index == totalCount-1&& orientation != CardSwipeOrientation.RECOVER){
+                                if(orientation == CardSwipeOrientation.LEFT){
+                                  onMessageRequested(docList[index]);
+                                }
+                                if(index == docList.length-1&& orientation != CardSwipeOrientation.RECOVER){
                                   setState(() {
                                     islistOver = true;
                                   });
@@ -91,8 +121,8 @@ class _MatchViewPageState extends State<MatchViewPage> {
 
                       },                    
                       child: new AnimatedContainer(
-                        width: messageBox+50,
-                        height: messageBox+50,
+                        width: messageBox+60,
+                        height: messageBox+60,
                         duration: Duration(milliseconds: 100),
                         decoration: BoxDecoration(
                           color: Colors.blue,
@@ -104,32 +134,32 @@ class _MatchViewPageState extends State<MatchViewPage> {
                       ),
                     ),
 
-                    GestureDetector(
-                      onTap: (){
+                    // GestureDetector(
+                    //   onTap: (){
                         
-                      },                    
-                      child: new AnimatedContainer(
-                        width: 50,
-                        height: 50,
-                        duration: Duration(milliseconds: 100),
+                    //   },                    
+                    //   child: new AnimatedContainer(
+                    //     width: 50,
+                    //     height: 50,
+                    //     duration: Duration(milliseconds: 100),
 
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: new Center(
-                          child: new Icon(Icons.favorite, size: 30, color: Colors.white),
-                        ),
-                      ),
-                    ),
+                    //     decoration: BoxDecoration(
+                    //       color: Colors.green,
+                    //       borderRadius: BorderRadius.circular(50),
+                    //     ),
+                    //     child: new Center(
+                    //       child: new Icon(Icons.favorite, size: 30, color: Colors.white),
+                    //     ),
+                    //   ),
+                    // ),
                     
                     GestureDetector(
                       onTap: (){
                       },                    
                       child: new AnimatedContainer(
                         
-                        width: favBox+50,
-                        height: favBox+50,
+                        width: favBox+60,
+                        height: favBox+60,
                         duration: Duration(milliseconds: 100),
 
                         decoration: BoxDecoration(
@@ -152,7 +182,6 @@ class _MatchViewPageState extends State<MatchViewPage> {
   Widget NoCardLeft(){
     
     
-    //print(widget.documents.documents[0].data);
     return Center(
                   child: new Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -186,9 +215,10 @@ class _MatchViewPageState extends State<MatchViewPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
         color: Colors.white,
-        child: islistOver? NoCardLeft() : TinderBody(1)
+        child: islistOver ||widget.documents.length ==0? NoCardLeft() : TinderBody(1)
     );
   }
 }

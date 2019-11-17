@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matchbussiness/Pages/ChatPage/allChatsPage.dart';
 import 'package:matchbussiness/Pages/ChatPage/chatPage.dart';
 import 'package:matchbussiness/Pages/MatchPage/matchFormPage.dart';
 import 'package:matchbussiness/Pages/ProfilePage/profilePage.dart';
@@ -25,10 +26,8 @@ class SkeletonPage extends StatelessWidget {
         body: TabBarView(
           physics: NeverScrollableScrollPhysics(),
           children: [
-            ChangeNotifierProvider(
-              builder: (context) => ChatService(),
-              child: ChatPage(),
-            ),
+          
+         AllChatsPage(),
             MatchFormPage(),
             ProfilePage(),
           ],

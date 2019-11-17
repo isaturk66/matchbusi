@@ -101,7 +101,7 @@ packages:
       name: flutter_webview_plugin
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.9"
+    version: "0.3.9+1"
   get_it:
     dependency: "direct main"
     description:

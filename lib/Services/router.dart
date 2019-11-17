@@ -1,5 +1,6 @@
 import 'package:matchbussiness/Constants/routerConstants.dart';
 import 'package:flutter/material.dart';
+import 'package:matchbussiness/Pages/ChatPage/chatPage.dart';
 import 'package:matchbussiness/Pages/CreateProfilePage/createProfilePage.dart';
 import 'package:matchbussiness/Pages/LoginPage/loginPage.dart';
 import 'package:matchbussiness/Pages/MatchPage/matchFormPage.dart';
@@ -27,6 +28,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     break;
     case skeletonRoute :{
       return MaterialPageRoute(builder: (context) => SkeletonPage());
+
+    }
+    break;
+
+    case chatRoute : {
+            return MaterialPageRoute(builder: (context) => PreChatPage(settings.arguments));
 
     }
     break;

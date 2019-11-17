@@ -3,13 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Matcher {
   final db = Firestore.instance;
 
-  matchQuerry1(var skill1) async {
+
+  Future<List<DocumentSnapshot>> matchQuerry() async {
     var result = await db
         .collection("users")
-        .where("skills", arrayContains: skill1)
         .getDocuments();
-    return result;
+    return result.documents;
   }
+
+
   matchQuerry2(var skill1,skill2) async {
     var result = await db
         .collection("users")

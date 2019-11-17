@@ -2,5 +2,6 @@ const String
   loginRoute = "/",
   matchFormRoute = "/matchForm",
   createAccountRoute = "/signUp",
-  skeletonRoute = "/skeleton"
+  skeletonRoute = "/skeleton",
+  chatRoute = "/preChat"
   ;

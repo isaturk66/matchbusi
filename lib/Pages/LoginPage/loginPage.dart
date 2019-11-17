@@ -6,6 +6,7 @@ import 'package:matchbussiness/Constants/routerConstants.dart';
 import 'package:linkedin_login/linkedin_login.dart';
 import 'package:matchbussiness/Models/createAccountArgModel.dart';
 import 'package:matchbussiness/Models/userModel.dart';
+import 'package:matchbussiness/Services/chatService.dart';
 import 'package:matchbussiness/Services/firebaseAuth.dart';
 
 import 'package:get_it/get_it.dart';
@@ -37,7 +38,9 @@ final GetIt sl = GetIt.instance;
     // Send authorization headers to the backend.
     headers: {HttpHeaders.authorizationHeader: "Bearer $token"}, /// Token object access tocen Bearer auth
   );
-  return processProfileImage(response.body);
+  var bodystring = response.body;
+  return processProfileImage(bodystring);
+  
 }
 
 processProfileImage(String jsonstring){
@@ -86,6 +89,7 @@ void initState(){
   }
 
   Widget build(BuildContext context) {
+
     return Scaffold(
       body:Container(
         color: Colors.white,
@@ -102,7 +106,7 @@ void initState(){
                 //print("UserID : "+linkedInUser.userId);
                 //print("ProfilePicture : "+linkedInUser.profilePicture.toString());
 
-print(linkedInUser.token.accessToken);
+                print(linkedInUser.token.accessToken);
                 
                 databaseReference
       .collection('users')
@@ -111,7 +115,7 @@ print(linkedInUser.token.accessToken);
       .listen((data) async{
         var profileimg = await fetchAccount(linkedInUser.token.accessToken);
         if(data.documents.isEmpty){
-                 Navigator.of(context).pushNamed(createAccountRoute,arguments: CreateAccArg(linkedInUser.userId,linkedInUser.email.elements[0].handleDeep.emailAddress,profileimg.body));
+                 Navigator.of(context).pushNamed(createAccountRoute,arguments: CreateAccArg(linkedInUser.userId,linkedInUser.email.elements[0].handleDeep.emailAddress,profileimg));
           
         }else{
         
@@ -121,11 +125,12 @@ print(linkedInUser.token.accessToken);
             email: data.documents.first.data['email'],
             title: data.documents.first.data['title'],
             skills: data.documents.first.data['skills'].cast<String>().toList(),
-            profilePicture: profileimg,
+            profilePicture: profileimg, 
+            conversations: data.documents.first.data['conversations'].cast<String>().toList(),
           );
             myAppModel.currentuser = model;
-                  Navigator.of(context).pushNamed(skeletonRoute);
-                  }
+            Navigator.of(context).pushNamed(skeletonRoute);
+        }
       });
                 
               
